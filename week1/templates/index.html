@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>검색 페이지</title>
+    </head>
+    <body>
+        <h1>검색 페이지</h1>
+        <form action="/search" method="GET">
+            <input type="text" name="q" placeholder="검색어 입력">
+            <button type="submit">검색</button>
+        </form>
+        <h2>방명록 작성</h2>
+        <form action="/write" method="POST">
+            <input type="text" name="name" placeholder="이름" required>
+            <br>
+            <textarea name="message" placeholder="메시지" required></textarea>
+            <br>
+            <button type="submit">작성</button>
+        </form>
+        <h2>모든 방명록</h2>
+        <ul>
+            {% if entries %}
+                {% for entry in entries %}
+                    <li><strong>{{ entry['name'] | safe}}</strong>: {{ entry['message'] | safe}}</li>
+                {% endfor %}
+            {% else %}
+                <li>아직 방명록이 없습니다.</li>
+            {% endif %}
+        </ul>
+    </body>
+</html>
